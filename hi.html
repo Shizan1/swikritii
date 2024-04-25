@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Show Photos</title>
+  <style>
+    /* Add your CSS styles here */
+    body {
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: black;
+    }
+
+    #photo {
+      max-width: 100%;
+      max-height: 100%;
+    }
+
+    #qualityMenu {
+      margin-top: 10px;
+    }
+
+    select {
+      color: black;
+    }
+  </style>
+</head>
+<body>
+  <img id="photo" src="" alt="Photo">
+  <div id="qualityMenu">
+    <select id="qualitySelect" onchange="changeQuality()" style="color: black;">
+      <option value="144">144p</option>
+      <option value="240">240p</option>
+      <option value="360">360p</option>
+      <option value="480">480p</option>
+      <option value="720">720p</option>
+      <option value="1080">1080p</option>
+    </select>
+  </div>
+  <script>
+    // Array of photo URLs with different qualities
+    const photoQualities = {
+      "144": "https://png.pngtree.com/element_our/20190524/ourmid/pngtree-simple-hand-painted-yellow-moon-transparent-material-image_1105222.jpg",
+      "240": "https://www.freeiconspng.com/thumbs/crescent-moon-png/crescent-moon-png-images-27.png",
+      "360": "https://img.freepik.com/premium-vector/yellow-moon-with-dark-spots-isolated-white-background-design-element_337410-2286.jpg",
+      "480": "https://i.pinimg.com/originals/74/6e/71/746e719145ae7cc29128f653451c6332.png",
+      "720": "https://media.istockphoto.com/id/514570802/photo/full-moon-isolated-on-white.webp?b=1&s=170667a&w=0&k=20&c=mYWbjll8x-KejV8WeHq8zVHbpei7dEc40QW6ArVwLtg=",
+      "1080": "https://mail.google.com/mail/u/0?ui=2&ik=bf7f5aede7&attid=0.7&permmsgid=msg-f:1797278429189046684&th=18f137357e49019c&view=fimg&fur=ip&sz=s0-l75-ft&attbid=ANGjdJ_iRdm9Rx1KFWilErtBeHx1MllJ_1hVbF5woiisGOl9grjZsa1Qbzog0edhiqbJtorB9dQH0RdoMQI9KKZaBsOvnFx2KmP7keCEr2DQaZa_Cz-n5-wKfNPFmB8&disp=emb&realattid=18f1372cb07ed7548515"
+    };
+
+    let currentQuality = "144";
+    const photoElement = document.getElementById('photo');
+    const qualitySelect = document.getElementById('qualitySelect');
+    
+    // Function to display photo at given quality
+    function displayPhoto(quality) {
+      const photoUrl = photoQualities[quality];
+      if (photoUrl) {
+        photoElement.src = photoUrl;
+        photoElement.alt = quality + "p Quality Photo";
+        currentQuality = quality;
+        // Change background color for 1080p
+        document.body.style.backgroundColor = (quality === "1080") ? "#ff69b4" : "white";
+      }
+    }
+
+    // Function to change quality
+    function changeQuality() {
+      const selectedQuality = qualitySelect.value;
+      displayPhoto(selectedQuality);
+    }
+
+    // Initially display the photo at 144p quality
+    displayPhoto("144");
+  </script>
+</body>
+</html>
+
